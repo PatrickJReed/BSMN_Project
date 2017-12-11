@@ -11,8 +11,6 @@ from IPython.display import Image
 from PIL import Image
 from IPython.display import Image as IPImage
 import shutil
-import pybedtools
-import pysam
 import re
 import xml.etree.ElementTree as ET
 import time

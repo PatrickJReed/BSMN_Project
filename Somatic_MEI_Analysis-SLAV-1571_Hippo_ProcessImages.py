@@ -11,8 +11,6 @@ from IPython.display import Image
 from PIL import Image
 from IPython.display import Image as IPImage
 import shutil
-import pybedtools
-import pysam
 import re
 import xml.etree.ElementTree as ET
 import time
@@ -56,17 +54,17 @@ for dset in Data_Sets:
     cell = dset[0]
     print cell
     os.chdir(os.path.join(basepath, cell))
-    # for file in glob.glob("*s*__*.png"):
-    #     newfile = re.sub("_s\d+__", "-", file)
-    #     shutil.move(file, newfile)
+     for file in glob.glob("*s*__*.png"):
+         newfile = re.sub("_s\d+__", "-", file)
+         shutil.move(file, newfile)
     for file in glob.glob("*-*.png"):
         img = Image.open(file)
         width = img.size[0]
         height = img.size[1]
-        img2 = img.crop((160,130,width,height)).resize((200,500))
+        img2 = img.crop((160,130,width,height))
         path = os.path.splitext(file)[0]
         basename = os.path.basename(path)
-        outfile1 = basename + "_crp.png"
+        outfile1 = basename + "_cropped.png"
         img2.save(outfile1)
         #os.remove(file)
 
