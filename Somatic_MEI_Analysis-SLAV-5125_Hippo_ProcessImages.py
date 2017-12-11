@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 from __future__ import division
 import glob, os, gc
 import os.path
@@ -43,15 +43,14 @@ L1_Other = "/home/ubuntu/efs/SLAV_Data/rmask_L1_Other_Final.bed"
 ##IGV Template
 IGV = "/home/ubuntu/efs/SLAV_Data/igv-template4.xml"
 
-Bulk_1846_Cerebellum = "1846_cereb_BT_13_L3"
-Bulk_1846_Cortex = "1846_cortex_BT_71_L3"
-Bulk_1846_Hippocampus = "1846_hippo_BT_19_L3"
-Bulk_1846_Liver = "1846_liver_BT_22_L3"
+Bulk_5125_Cortex = "5125_cortex_BT_122_L3"
+Bulk_5125_Hippocampus = "5125_hippo_BT_139_L3"
+Bulk_5125_Liver = "5125_liver_BT_164_L3"
 
-SC_1846_Hippo = ["1846_hippo_SC_100_L3","1846_hippo_SC_101_L3","1846_hippo_SC_102_L3","1846_hippo_SC_103_L3","1846_hippo_SC_104_L3","1846_hippo_SC_105_L3","1846_hippo_SC_106_L3","1846_hippo_SC_107_L3","1846_hippo_SC_108_L3","1846_hippo_SC_109_L3","1846_hippo_SC_110_L3","1846_hippo_SC_111_L3","1846_hippo_SC_112_L3","1846_hippo_SC_113_L3","1846_hippo_SC_88_L3","1846_hippo_SC_89_L3","1846_hippo_SC_90_L3","1846_hippo_SC_91_L3","1846_hippo_SC_92_L3","1846_hippo_SC_93_L3","1846_hippo_SC_94_L3","1846_hippo_SC_95_L3","1846_hippo_SC_99_L3"]
+SC_5125_Hippo = ["5125_hippo_SC_140_L3","5125_hippo_SC_141_L3","5125_hippo_SC_142_L3","5125_hippo_SC_143_L3","5125_hippo_SC_144_L3","5125_hippo_SC_145_L3","5125_hippo_SC_147_L3","5125_hippo_SC_149_L3","5125_hippo_SC_150_L3","5125_hippo_SC_151_L3","5125_hippo_SC_152_L3","5125_hippo_SC_153_L3","5125_hippo_SC_154_L3","5125_hippo_SC_155_L3","5125_hippo_SC_156_L3","5125_hippo_SC_157_L3","5125_hippo_SC_158_L3","5125_hippo_SC_159_L3","5125_hippo_SC_160_L3","5125_hippo_SC_161_L3","5125_hippo_SC_162_L3","5125_hippo_SC_163_L3"]
 
 Data_Sets = []
-Data_Sets.append([SC_1846_Hippo,Bulk_1846_Hippocampus,Bulk_1846_Liver])
+Data_Sets.append([SC_5125_Hippo,Bulk_5125_Hippocampus,Bulk_5125_Liver])
 
 for dset in Data_Sets:
     for cell in dset[0]:
