@@ -59,15 +59,15 @@ for dset in Data_Sets:
     # for file in glob.glob("*s*__*.png"):
     #     newfile = re.sub("_s\d+__", "-", file)
     #     shutil.move(file, newfile)
-    # for file in glob.glob("*-*.png"):
-    #     img = Image.open(file)
-    #     width = img.size[0]
-    #     height = img.size[1]
-    #     img2 = img.crop((70,130,width,height)).resize((200,500))
-    #     path = os.path.splitext(file)[0]
-    #     basename = os.path.basename(path)
-    #     outfile1 = basename + "_crp.png"
-    #     img2.save(outfile1)
+     for file in glob.glob("*-*.png"):
+         img = Image.open(file)
+         width = img.size[0]
+         height = img.size[1]
+         img2 = img.crop((160,130,width,height)).resize((200,500))
+         path = os.path.splitext(file)[0]
+         basename = os.path.basename(path)
+         outfile1 = basename + "_crp.png"
+         img2.save(outfile1)
         #os.remove(file)
 
     mergedpeak_data = os.path.join(basepath, cell, cell + peaks_correct_data)
