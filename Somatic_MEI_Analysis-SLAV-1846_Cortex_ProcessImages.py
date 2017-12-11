@@ -11,8 +11,6 @@ from IPython.display import Image
 from PIL import Image
 from IPython.display import Image as IPImage
 import shutil
-import pybedtools
-import pysam
 import re
 import xml.etree.ElementTree as ET
 import time
@@ -133,4 +131,3 @@ for dset in Data_Sets:
             #encoding = Fj+":"+Pj.strip().split('\t')[0]+":"+Sj.strip().split('\t')[0]+":"+Lj.strip().split('\t')[0]+":"+Pj.strip().split('\t')[1]+":"+Sj.strip().split('\t')[1]+":"+Lj.strip().split('\t')[1]+"\n"
             f8.write(encoding)
 print "DONE!"
-            
