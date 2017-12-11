@@ -76,7 +76,7 @@ for dset in Data_Sets:
     with open(mergedpeak_data) as r0,open(regions_sml) as r_sml,open(regions_lrg) as r_lrg:
         Files= {}
         for rr0,rr_sml,rr_lrg in zip(r0,r_sml,r_lrg):
-            line = rr0.strip().split('\t')[0]+"\t"+rr0.strip().split('\t')[1]+"\t"+rr0.strip().split('\t')[2]+"\t"+cell+"_sml-"+rr_sml.strip().split('\t')[0]+"_"+rr_sml.strip().split('\t')[1]+"_"+rr_sml.strip().split('\t')[2]+"_crp.png"+"\t"+cell+"_lrg-"+rr_lrg.strip().split('\t')[0]+"_"+rr_lrg.strip().split('\t')[1]+"_"+rr_lrg.strip().split('\t')[2]+"_crp.png"+"\t"+rr0.strip().split('\t')[3]
+            line = rr0.strip().split('\t')[0]+"\t"+rr0.strip().split('\t')[1]+"\t"+rr0.strip().split('\t')[2]+"\t"+cell+"_sml-"+rr_sml.strip().split('\t')[0]+"_"+rr_sml.strip().split('\t')[1]+"_"+rr_sml.strip().split('\t')[2]+"_cropped.png"+"\t"+cell+"_lrg-"+rr_lrg.strip().split('\t')[0]+"_"+rr_lrg.strip().split('\t')[1]+"_"+rr_lrg.strip().split('\t')[2]+"_cropped.png"+"\t"+rr0.strip().split('\t')[3]
             Files[str(count)] = line
             count+=1
 
