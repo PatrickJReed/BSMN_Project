@@ -54,9 +54,9 @@ for dset in Data_Sets:
     cell = dset[0]
     print cell
     os.chdir(os.path.join(basepath, cell))
-     for file in glob.glob("*s*__*.png"):
-         newfile = re.sub("_s\d+__", "-", file)
-         shutil.move(file, newfile)
+    for file in glob.glob("*s*__*.png"):
+        newfile = re.sub("_s\d+__", "-", file)
+        shutil.move(file, newfile)
     for file in glob.glob("*-*.png"):
         img = Image.open(file)
         width = img.size[0]
