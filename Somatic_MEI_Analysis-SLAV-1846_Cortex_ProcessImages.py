@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from __future__ import division
-import glob, os, gc
+import glob, os, gc, sys
 import os.path
 import csv
 import numpy as np
@@ -132,3 +132,5 @@ for dset in Data_Sets:
         #for (Fi, Fj),(Pi,Pj),(Si,Sj),(Li,Lj) in zip(Files.items(),Peaks.items(),Small.items(),Large.items()):
             #encoding = Fj+":"+Pj.strip().split('\t')[0]+":"+Sj.strip().split('\t')[0]+":"+Lj.strip().split('\t')[0]+":"+Pj.strip().split('\t')[1]+":"+Sj.strip().split('\t')[1]+":"+Lj.strip().split('\t')[1]+"\n"
             f8.write(encoding)
+print "DONE!"
+            
