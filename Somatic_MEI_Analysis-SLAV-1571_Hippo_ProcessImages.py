@@ -61,10 +61,10 @@ for dset in Data_Sets:
         img = Image.open(file)
         width = img.size[0]
         height = img.size[1]
-        img2 = img.crop((160,130,width,height)).resize((200,500))
+        img2 = img.crop((160,130,width,height))
         path = os.path.splitext(file)[0]
         basename = os.path.basename(path)
-        outfile1 = basename + "_crp.png"
+        outfile1 = basename + "_cropped.png"
         img2.save(outfile1)
         #os.remove(file)
 
