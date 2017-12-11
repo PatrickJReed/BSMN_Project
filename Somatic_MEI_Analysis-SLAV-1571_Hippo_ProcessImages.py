@@ -44,7 +44,6 @@ L1PA2345 = "/home/ubuntu/efs/SLAV_Data/rmask_L1PA2345_Final.bed"
 L1_Other = "/home/ubuntu/efs/SLAV_Data/rmask_L1_Other_Final.bed"
 ##IGV Template
 IGV = "/home/ubuntu/efs/SLAV_Data/igv-template4.xml"
-print
 Bulk_1571_Cerebellum = "1571_cereb_BT_40_L3"
 Bulk_1571_Hippocampus = "1571_hippo_BT_41_L3"
 SC_1571_Hippo = sys.argv[1]
@@ -54,7 +53,7 @@ Data_Sets = []
 Data_Sets.append([SC_1571_Hippo,Bulk_1571_Hippocampus,Bulk_1571_Cerebellum])
 
 for dset in Data_Sets:
-    cell = dset[0]:ß
+    cell = dset[0]
     print cell
     os.chdir(os.path.join(basepath, cell))
     for file in glob.glob("*s*__*.png"):
@@ -71,9 +70,9 @@ for dset in Data_Sets:
         img2.save(outfile1)
         #os.remove(file)
 
-    mergedpeak_data = os.path.join(basepath, diry, cell, cell + peaks_correct_data)
-    regions_sml = os.path.join(basepath, diry, cell, cell + peakregions_sml)
-    regions_lrg = os.path.join(basepath, diry, cell, cell + peakregions_lrg)
+    mergedpeak_data = os.path.join(basepath, cell, cell + peaks_correct_data)
+    regions_sml = os.path.join(basepath, cell, cell + peakregions_sml)
+    regions_lrg = os.path.join(basepath, cell, cell + peakregions_lrg)
 
     count=1
     with open(mergedpeak_data) as r0,open(regions_sml) as r_sml,open(regions_lrg) as r_lrg:
@@ -83,12 +82,12 @@ for dset in Data_Sets:
             Files[str(count)] = line
             count+=1
 
-    a = os.path.join(basepath, diry, cell, cell+"_overlap_0_binary")
-    b = os.path.join(basepath, diry, cell, cell+"_overlap_1_binary")
-    c = os.path.join(basepath, diry, cell, cell+"_overlap_2_binary")
-    d = os.path.join(basepath, diry, cell, cell+"_overlap_3_binary")
-    e = os.path.join(basepath, diry, cell, cell+"_overlap_4_binary")
-    f = os.path.join(basepath, diry, cell, cell+"_overlap_5_binary")
+    a = os.path.join(basepath, cell, cell+"_overlap_0_binary")
+    b = os.path.join(basepath, cell, cell+"_overlap_1_binary")
+    c = os.path.join(basepath, cell, cell+"_overlap_2_binary")
+    d = os.path.join(basepath, cell, cell+"_overlap_3_binary")
+    e = os.path.join(basepath, cell, cell+"_overlap_4_binary")
+    f = os.path.join(basepath, cell, cell+"_overlap_5_binary")
     count=1
     with open(a) as f1,open(b) as f2,open(c) as f3,open(d) as f4,open(e) as f5,open(f) as f6:
         Peaks = {}
@@ -97,12 +96,12 @@ for dset in Data_Sets:
             Peaks[str(count)] = line
             count+=1
 
-    a_sml = os.path.join(basepath, diry, cell, cell+"_overlap_sml_0_binary")
-    b_sml = os.path.join(basepath, diry, cell, cell+"_overlap_sml_1_binary")
-    c_sml = os.path.join(basepath, diry, cell, cell+"_overlap_sml_2_binary")
-    d_sml = os.path.join(basepath, diry, cell, cell+"_overlap_sml_3_binary")
-    e_sml = os.path.join(basepath, diry, cell, cell+"_overlap_sml_4_binary")
-    f_sml = os.path.join(basepath, diry, cell, cell+"_overlap_sml_5_binary")
+    a_sml = os.path.join(basepath, cell, cell+"_overlap_sml_0_binary")
+    b_sml = os.path.join(basepath, cell, cell+"_overlap_sml_1_binary")
+    c_sml = os.path.join(basepath, cell, cell+"_overlap_sml_2_binary")
+    d_sml = os.path.join(basepath, cell, cell+"_overlap_sml_3_binary")
+    e_sml = os.path.join(basepath, cell, cell+"_overlap_sml_4_binary")
+    f_sml = os.path.join(basepath, cell, cell+"_overlap_sml_5_binary")
     count=1
     with open(a_sml) as f1,open(b_sml) as f2,open(c_sml) as f3,open(d_sml) as f4,open(e_sml) as f5,open(f_sml) as f6:
         Small = {}
@@ -111,12 +110,12 @@ for dset in Data_Sets:
             Small[str(count)] = line
             count+=1
 
-    a_lrg = os.path.join(basepath, diry, cell, cell+"_overlap_lrg_0_binary")
-    b_lrg = os.path.join(basepath, diry, cell, cell+"_overlap_lrg_1_binary")
-    c_lrg = os.path.join(basepath, diry, cell, cell+"_overlap_lrg_2_binary")
-    d_lrg = os.path.join(basepath, diry, cell, cell+"_overlap_lrg_3_binary")
-    e_lrg = os.path.join(basepath, diry, cell, cell+"_overlap_lrg_4_binary")
-    f_lrg = os.path.join(basepath, diry, cell, cell+"_overlap_lrg_5_binary")
+    a_lrg = os.path.join(basepath, cell, cell+"_overlap_lrg_0_binary")
+    b_lrg = os.path.join(basepath, cell, cell+"_overlap_lrg_1_binary")
+    c_lrg = os.path.join(basepath, cell, cell+"_overlap_lrg_2_binary")
+    d_lrg = os.path.join(basepath, cell, cell+"_overlap_lrg_3_binary")
+    e_lrg = os.path.join(basepath, cell, cell+"_overlap_lrg_4_binary")
+    f_lrg = os.path.join(basepath, cell, cell+"_overlap_lrg_5_binary")
     count=1
     with open(a_lrg) as f1,open(b_lrg) as f2,open(c_lrg) as f3,open(d_lrg) as f4,open(e_lrg) as f5,open(f_lrg) as f6:
         Large = {}
@@ -125,7 +124,7 @@ for dset in Data_Sets:
             Large[str(count)] = line
             count+=1
 
-    with open(os.path.join(basepath, diry, cell, cell+"_Input_metadata.txt"),"w") as f8:
+    with open(os.path.join(basepath, cell, cell+"_Input_metadata.txt"),"w") as f8:
         for key in Files:
             encoding = Files[key]+":"+Peaks[key].strip().split('\t')[0]+":"+Large[key].strip().split('\t')[0]+":"+Peaks[key].strip().split('\t')[1]+"\n"
         #for (Fi, Fj),(Pi,Pj),(Si,Sj),(Li,Lj) in zip(Files.items(),Peaks.items(),Small.items(),Large.items()):
