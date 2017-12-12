@@ -61,10 +61,10 @@ for dset in Data_Sets:
         img = Image.open(file)
         width = img.size[0]
         height = img.size[1]
-        img2 = img.crop((70,130,width,height)).resize((200,500))
+        img2 = img.crop((160,130,width,height))
         path = os.path.splitext(file)[0]
         basename = os.path.basename(path)
-        outfile1 = basename + "_crp.png"
+        outfile1 = basename + "_cropped.png"
         img2.save(outfile1)
         #os.remove(file)
 
@@ -76,7 +76,7 @@ for dset in Data_Sets:
     with open(mergedpeak_data) as r0,open(regions_sml) as r_sml,open(regions_lrg) as r_lrg:
         Files= {}
         for rr0,rr_sml,rr_lrg in zip(r0,r_sml,r_lrg):
-            line = rr0.strip().split('\t')[0]+"\t"+rr0.strip().split('\t')[1]+"\t"+rr0.strip().split('\t')[2]+"\t"+cell+"_sml-"+rr_sml.strip().split('\t')[0]+"_"+rr_sml.strip().split('\t')[1]+"_"+rr_sml.strip().split('\t')[2]+"_crp.png"+"\t"+cell+"_lrg-"+rr_lrg.strip().split('\t')[0]+"_"+rr_lrg.strip().split('\t')[1]+"_"+rr_lrg.strip().split('\t')[2]+"_crp.png"+"\t"+rr0.strip().split('\t')[3]
+            line = rr0.strip().split('\t')[0]+"\t"+rr0.strip().split('\t')[1]+"\t"+rr0.strip().split('\t')[2]+"\t"+cell+"_sml-"+rr_sml.strip().split('\t')[0]+"_"+rr_sml.strip().split('\t')[1]+"_"+rr_sml.strip().split('\t')[2]+"_cropped.png"+"\t"+cell+"_lrg-"+rr_lrg.strip().split('\t')[0]+"_"+rr_lrg.strip().split('\t')[1]+"_"+rr_lrg.strip().split('\t')[2]+"_cropped.png"+"\t"+rr0.strip().split('\t')[3]
             Files[str(count)] = line
             count+=1
 
