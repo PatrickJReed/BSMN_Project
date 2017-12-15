@@ -54,19 +54,19 @@ Data_Sets.append([SC_1846_Hippo,Bulk_1846_Hippocampus,Bulk_1846_Liver])
 for dset in Data_Sets:
     cell = dset[0]
     print cell
-    os.chdir(os.path.join(basepath, cell))
-    for file in glob.glob("*s*__*.png"):
-        newfile = re.sub("_s\d+__", "-", file)
-        shutil.move(file, newfile)
-    for file in glob.glob("*-*.png"):
-        img = Image.open(file)
-        width = img.size[0]
-        height = img.size[1]
-        img2 = img.crop((160,130,width,height))
-        path = os.path.splitext(file)[0]
-        basename = os.path.basename(path)
-        outfile1 = basename + "_cropped.png"
-        img2.save(outfile1)
+    # os.chdir(os.path.join(basepath, cell))
+    # for file in glob.glob("*s*__*.png"):
+    #     newfile = re.sub("_s\d+__", "-", file)
+    #     shutil.move(file, newfile)
+    # for file in glob.glob("*-*.png"):
+    #     img = Image.open(file)
+    #     width = img.size[0]
+    #     height = img.size[1]
+    #     img2 = img.crop((160,130,width,height))
+    #     path = os.path.splitext(file)[0]
+    #     basename = os.path.basename(path)
+    #     outfile1 = basename + "_cropped.png"
+    #     img2.save(outfile1)
         #os.remove(file)
 
     mergedpeak_data = os.path.join(basepath, cell, cell + peaks_correct_data)
@@ -125,7 +125,7 @@ for dset in Data_Sets:
 
     with open(os.path.join(basepath, cell, cell+"_Input_metadata.txt"),"w") as f8:
         for key in Files:
-            encoding = Files[key]+":"+Peaks[key].strip().split('\t')[0]+":"+Large[key].strip().split('\t')[0]+":"+Peaks[key].strip().split('\t')[1]+"\n"
+            encoding = Files[key]+":"+Peaks[key].strip().split('\t')[0]+":"+Small[key].strip().split('\t')[0]+":"+Peaks[key].strip().split('\t')[1]+"\n"
         #for (Fi, Fj),(Pi,Pj),(Si,Sj),(Li,Lj) in zip(Files.items(),Peaks.items(),Small.items(),Large.items()):
             #encoding = Fj+":"+Pj.strip().split('\t')[0]+":"+Sj.strip().split('\t')[0]+":"+Lj.strip().split('\t')[0]+":"+Pj.strip().split('\t')[1]+":"+Sj.strip().split('\t')[1]+":"+Lj.strip().split('\t')[1]+"\n"
             f8.write(encoding)
