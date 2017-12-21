@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from __future__ import division
-import glob, os, gc, sys
+import glob, os, gc
 import os.path
 import csv
 import numpy as np
@@ -11,8 +11,6 @@ from IPython.display import Image
 from PIL import Image
 from IPython.display import Image as IPImage
 import shutil
-import pybedtools
-import pysam
 import re
 import xml.etree.ElementTree as ET
 import time
@@ -49,7 +47,8 @@ Bulk_1846_Cortex = "1846_cortex_BT_71_L3"
 Bulk_1846_Hippocampus = "1846_hippo_BT_19_L3"
 Bulk_1846_Liver = "1846_liver_BT_22_L3"
 
-SC_1846_Cortex = ["1846_cortex_SC_72_L3","1846_cortex_SC_73_L3","1846_cortex_SC_74_L3","1846_cortex_SC_75_L3","1846_cortex_SC_78_L3","1846_cortex_SC_79_L3","1846_cortex_SC_80_L3","1846_cortex_SC_81_L3","1846_cortex_SC_82_L3","1846_cortex_SC_83_L3","1846_cortex_SC_84_L3","1846_cortex_SC_85_L3","1846_cortex_SC_86_L3"]
+SC_1846_Cortex = ["1846_cortex_SC_73_L3","1846_cortex_SC_78_L3","1846_cortex_SC_79_L3","1846_cortex_SC_82_L3","1846_cortex_SC_83_L3","1846_cortex_SC_85_L3"]
+
 
 
 Data_Sets = []
@@ -60,7 +59,7 @@ for dset in Data_Sets:
         print cell
         os.chdir(os.path.join(basepath, cell))
         locifile = os.path.join(basepath, cell, cell + loci_sml)
-        worklist = glob.glob("*.split_loci_sml_*")
+        worklist = glob.glob("*.split_loci_lrg_*")
         batchsize = 10
         print len(worklist)
         for i in xrange(0, len(worklist), batchsize):
@@ -73,10 +72,10 @@ for dset in Data_Sets:
                 with open(os.path.join(basepath, cell, file)) as f0:
                     first = f0.readline()# Read the first line.
                     for last in f0: pass
-                    firstpic = cell+"_sml"+"*"+first.strip().split(':')[0]+"_"+first.strip().split(':')[1].split('-')[0]+"_"+first.strip().split(':')[1].split('-')[1]+".png"
-                    lastpic = cell+"_sml"+"*"+last.strip().split(':')[0]+"_"+last.strip().split(':')[1].split('-')[0]+"_"+last.strip().split(':')[1].split('-')[1]+".png"
+                    firstpic = cell+"_lrg"+"*"+first.strip().split(':')[0]+"_"+first.strip().split(':')[1].split('-')[0]+"_"+first.strip().split(':')[1].split('-')[1]+".png"
+                    lastpic = cell+"_lrg"+"*"+last.strip().split(':')[0]+"_"+last.strip().split(':')[1].split('-')[0]+"_"+last.strip().split(':')[1].split('-')[1]+".png"
                     if not (glob.glob(os.path.join(basepath, cell, firstpic)) or glob.glob(os.path.join(basepath, cell, lastpic))):
-                        p = Popen(['igv_plotter', '-o', cell+"_sml_", '-L', file, '--max-panel-height', '1000', '--igv-jar-path', '/home/ubuntu/efs/SLAV_Data/IGV_2.4-rc6/igv.jar', '-m', '6G', '-g', 'hg19', os.path.join(basepath, cell, cell + igv)])
+                        p = Popen(['igv_plotter', '-o', cell+"_lrg_", '-L', file, '-v', '--max-panel-height', '1000', '--igv-jar-path', '/home/ubuntu/efs/SLAV_Data/IGV_2.4-rc6/igv.jar', '-m', '6G', '-g', 'hg19', os.path.join(basepath, cell, cell + igv)])
                         procs.append(p)
             for pp in procs:
                 pp.wait()
