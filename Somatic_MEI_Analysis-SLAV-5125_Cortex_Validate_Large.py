@@ -53,18 +53,18 @@ Bulk_5125_Cortex = "5125_cortex_BT_122_L3"
 Bulk_5125_Hippocampus = "5125_hippo_BT_139_L3"
 Bulk_5125_Liver = "5125_liver_BT_164_L3"
 
-SC_1571_Hippo_Train = sys.argv[1]
+SC_5125_Cortex_Validation = sys.argv[1]
 
 
 
 
 Data_Sets_Train = []
-Data_Sets_Train.append([SC_1571_Hippo_Train,Bulk_1571_Hippocampus,Bulk_1571_Cerebellum])
+#Data_Sets_Train.append([SC_1571_Hippo_Train,Bulk_1571_Hippocampus,Bulk_1571_Cerebellum])
 #Data_Sets_Train.append([SC_1846_Cortex_Train,Bulk_1846_Cortex,Bulk_1846_Liver])
 #Data_Sets_Train.append([SC_1846_Hippo_Train,Bulk_1846_Hippocampus,Bulk_1846_Liver])
 
 Data_Sets_Validation = []
-#Data_Sets_Validation.append([SC_5125_Cortex_Validation,Bulk_5125_Cortex,Bulk_5125_Liver])
+Data_Sets_Validation.append([SC_5125_Cortex_Validation,Bulk_5125_Cortex,Bulk_5125_Liver])
 #Data_Sets_Validation.append([SC_5125_Hippo_Validation,Bulk_5125_Hippocampus,Bulk_5125_Liver])
 
 Data_Sets_Test = []
@@ -74,7 +74,7 @@ Data_Sets_Test = []
 #SC_5125_Cortex_Test = list(set(SC_5125_Cortex_All) - set(SC_5125_Cortex_Validation))
 #SC_5125_Hippo_Test = list(set(SC_5125_Hippo_All) - set(SC_5125_Hippo_Validation))
 
-for dset in Data_Sets_Train:
+for dset in Data_Sets_Validation:
     cell = dset[0]
     print cell
     os.chdir(os.path.join(basepath, cell))
@@ -90,7 +90,7 @@ for dset in Data_Sets_Train:
         outfile1 = basename + "_cropped.png"
         img2.save(outfile1)
 print "Done_A!"
-for dset in Data_Sets_Train:
+for dset in Data_Sets_Validation:
     cell = dset[0]
     print cell
     with open(os.path.join(basepath, cell, cell+"_Input_metadata.txt")) as f:
@@ -105,9 +105,9 @@ for dset in Data_Sets_Train:
                 L1_class_lrg = line[5].split(":")[6]
                 class_lrg = [readclass,peakclass_peak,L1_class_peak,peakclass_lrg,L1_class_lrg]
                 dst = "".join(class_lrg)
-                if not os.path.exists(os.path.join(basepath, "Train_Large", dst)):
-                    os.makedirs(os.path.join(basepath, "Train_Large", dst))
+                if not os.path.exists(os.path.join(basepath, "Validation_Large", dst)):
+                    os.makedirs(os.path.join(basepath, "Validation_Large", dst))
                 if os.path.isfile(os.path.join(basepath, cell,filename)): 
-                    if not os.path.isfile(os.path.join(basepath, "Train_Large", dst,filename)):
-                        shutil.move(os.path.join(basepath, cell,filename), os.path.join(basepath, "Train_Large", dst))
-print "Done_B!" 
+                    if not os.path.isfile(os.path.join(basepath, "Validation_Large", dst,filename)):
+                        shutil.move(os.path.join(basepath, cell,filename), os.path.join(basepath, "Validation_Large", dst))
+print "Done_B!"                      
