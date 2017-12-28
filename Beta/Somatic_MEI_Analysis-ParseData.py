@@ -70,7 +70,7 @@ for dset in Data_Sets:
         myinput = open(os.path.join(basepath,  cell, cell + peaks_merged_bed))
         myoutput = open(os.path.join(basepath,  cell, cell + peaks_correct_bed), 'w')
         proc3 = Popen(['grep', '-E', '^(1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|X|Y)'], stdin=myinput, stdout=myoutput)
-        proc3.wait()    
+        proc3.wait()
 
         myinput = os.path.join(basepath,  cell, cell + peaks_correct_bed)
         myoutput1 = os.path.join(basepath,  cell, cell + peakregions_sml)
@@ -81,7 +81,7 @@ for dset in Data_Sets:
                 for string in data:
                     line = string.split('\t')
                     pos1 = int(line[1])
-                    pos2 = int(line[2])                  
+                    pos2 = int(line[2])
                     center = int((pos1 + pos2)/2)
                     pad = 1000
                     start = center - pad
@@ -89,14 +89,14 @@ for dset in Data_Sets:
                     row = [line[0], str(start), str(end)]
                     outfile.write('\t'.join(row) + '\n')
         outfile.close()
-        infile.close()   
+        infile.close()
         with open(myoutput2, 'w') as outfile:
             with open(myinput, 'r') as infile:
                 data = infile.readlines()
                 for string in data:
                     line = string.split('\t')
                     pos1 = int(line[1])
-                    pos2 = int(line[2])                  
+                    pos2 = int(line[2])
                     center = int((pos1 + pos2)/2)
                     pad = 10000
                     newstart = center - pad
@@ -105,18 +105,15 @@ for dset in Data_Sets:
                     outfile.write('\t'.join(row) + '\n')
         outfile.close()
         infile.close()
- 
-        #make and define L1HS sub sam file here and L1HS read names list
-        
-               
+                
         sc_file = pysam.AlignmentFile(os.path.join(basepath,  cell, cell + bam), "rb")
         bb_file = pysam.AlignmentFile(os.path.join(basepath,  dset[1], dset[1] + bam), "rb")
         bf_file = pysam.AlignmentFile(os.path.join(basepath,  dset[2], dset[2] + bam), "rb")
-        
+
 
         myinput = os.path.join(basepath,  cell, cell + peaks_correct_bed)
         myoutput = os.path.join(basepath,  cell, cell + peaks_correct_data)
-        
+
         with open(myoutput, 'w') as outfile:
             with open(myinput, 'r') as infile:
                 data = infile.readlines()
@@ -131,11 +128,11 @@ for dset in Data_Sets:
                     for y in bb_iter: bb_i+=1
                     for z in bf_iter: bf_i+=1
                     sc_count = 1 if sc_i > 0 else 0
-                    bb_count = 1 if bb_i > 0 else 0 
-                    bf_count = 1 if bf_i > 0 else 0 
-                    row = [str(region.strip().split('\t')[0]), str(region.strip().split('\t')[1]), str(region.strip().split('\t')[2])]  
+                    bb_count = 1 if bb_i > 0 else 0
+                    bf_count = 1 if bf_i > 0 else 0
+                    row = [str(region.strip().split('\t')[0]), str(region.strip().split('\t')[1]), str(region.strip().split('\t')[2])]
                     outfile.write('\t'.join(row) +'\t'+str(sc_count)+str(bb_count)+str(bf_count)+'\n')
-        
+
         myinput = os.path.join(basepath,  cell, cell + peaks_correct_bed)
         myoutput = open(os.path.join(basepath, cell, cell + L1HS_bam), 'w')
         myoutput2 = os.path.join(basepath,  cell, cell + peaks_L1HS_bedgraph)
@@ -145,10 +142,10 @@ for dset in Data_Sets:
         p2.wait()
         L1HS_file = pysam.AlignmentFile(os.path.join(basepath, cell, cell + L1HS_bam), 'rb')
         L1HS_read_names =[]
-        for read in L1HS_file.fetch(): 
+        for read in L1HS_file.fetch():
             read_name = int(str(read).split('\t')[0].split('.')[1])
             L1HS_read_names.append(read_name)
-        #print len(L1HS_read_names)    
+        #print len(L1HS_read_names)
         with open(myoutput2, 'w') as outfile:
             with open(myinput, 'r') as infile:
                 data = infile.readlines()
@@ -157,11 +154,11 @@ for dset in Data_Sets:
                     for read in sc_file.fetch(region.split('\t')[0], int(region.split('\t')[1]), int(region.split('\t')[2])):
                         read_name = int(str(read).split('\t')[0].split('.')[1])
                         read_names.append(read_name)
-                    a = len(read_names)    
+                    a = len(read_names)
                     L1HS_overlap = set(read_names) & set(L1HS_read_names)
                     b = len(L1HS_overlap)
                     percent = int((b/a)*100)
-                    row = [str(region.strip().split('\t')[0]), str(region.strip().split('\t')[1]), str(region.strip().split('\t')[2]), str(percent)]  
+                    row = [str(region.strip().split('\t')[0]), str(region.strip().split('\t')[1]), str(region.strip().split('\t')[2]), str(percent)]
                     outfile.write('\t'.join(row)+'\n')
 
         filelist =[os.path.join(basepath,  cell, "peaks.bed"),os.path.join(basepath,  dset[1], "peaks.bed"),os.path.join(basepath,  dset[2], "peaks.bed"),L1HS,L1PA2345,L1_Other]
@@ -177,7 +174,7 @@ for dset in Data_Sets:
             newoutput = open(myoutput+"_binary", 'w')
             #overlap_append
             awk_cmd = r"""BEGIN { OFS = "\t"; }; { if ($7 ~ "^[1-9]*$") $7 = "1"; else $7 = $7; }; 1"""
-            proc = Popen(['awk', awk_cmd], stdin=myinput, stdout=newoutput)  
+            proc = Popen(['awk', awk_cmd], stdin=myinput, stdout=newoutput)
             proc.wait()
             newoutput.flush()
 
@@ -193,7 +190,7 @@ for dset in Data_Sets:
             newoutput = open(myoutput+"_binary", 'w')
             #overlap_append
             awk_cmd = r"""BEGIN { OFS = "\t"; }; { if ($4 >= 2) $4 = "2"; else $4 = $4; }; 1"""
-            proc = Popen(['awk', awk_cmd], stdin=myinput, stdout=newoutput)  
+            proc = Popen(['awk', awk_cmd], stdin=myinput, stdout=newoutput)
             proc.wait()
             newoutput.flush()
 
@@ -209,9 +206,9 @@ for dset in Data_Sets:
             newoutput = open(myoutput+"_binary", 'w')
             #overlap_append
             awk_cmd = r"""BEGIN { OFS = "\t"; }; { if ($4 >= 2) $4 = "2"; else $4 = $4; }; 1"""
-            proc = Popen(['awk', awk_cmd], stdin=myinput, stdout=newoutput)  
+            proc = Popen(['awk', awk_cmd], stdin=myinput, stdout=newoutput)
             proc.wait()
-            newoutput.flush()        
+            newoutput.flush()
 
         myinput_sml = os.path.join(basepath,  cell, cell + peakregions_sml)
         myoutput_sml = os.path.join(basepath,  cell, cell + loci_sml)
@@ -219,7 +216,7 @@ for dset in Data_Sets:
             with open(myinput_sml, 'r') as infile:
                 data = infile.readlines()
                 for region in data:
-                    row = [str(region.strip().split('\t')[0]),":",str(region.strip().split('\t')[1]),"-",str(region.strip().split('\t')[2])]  
+                    row = [str(region.strip().split('\t')[0]),":",str(region.strip().split('\t')[1]),"-",str(region.strip().split('\t')[2])]
                     outfile.write("".join(row)+'\n')
 
         myinput_lrg = os.path.join(basepath,  cell, cell + peakregions_lrg)
@@ -228,8 +225,8 @@ for dset in Data_Sets:
             with open(myinput_lrg, 'r') as infile:
                 data = infile.readlines()
                 for region in data:
-                    row = [str(region.strip().split('\t')[0]),":",str(region.strip().split('\t')[1]),"-",str(region.strip().split('\t')[2])]  
-                    outfile.write("".join(row)+'\n')    
+                    row = [str(region.strip().split('\t')[0]),":",str(region.strip().split('\t')[1]),"-",str(region.strip().split('\t')[2])]
+                    outfile.write("".join(row)+'\n')
 
         Popen(['split', '-l', '100', '-d', os.path.join(basepath,  cell, cell + loci_sml), os.path.join(basepath,  cell, cell + ".split_loci_sml_")]).wait()
         Popen(['split', '-l', '100', '-d', os.path.join(basepath,  cell, cell + loci_lrg), os.path.join(basepath,  cell, cell + ".split_loci_lrg_")]).wait()

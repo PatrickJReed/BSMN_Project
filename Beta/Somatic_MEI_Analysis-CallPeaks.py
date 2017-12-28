@@ -23,7 +23,7 @@ import xml.etree.ElementTree as ET
 import time
 
 ##Path to Data
-basepath = "/home/ubuntu/efs/SLAV_Data/" 
+basepath = "/home/ubuntu/efs/SLAV_Data/"
 narrowpeak = "-ready_peaks.narrowPeak"
 peaks_merged = "_peaksMerged.txt"
 peaks_merged_bed = "_peaksMerged.bed"
@@ -41,7 +41,7 @@ L1HS_bam = "-L1HS_mapped.bam"
 bam = "-ready.bam"
 igv = "-igv.xml"
 bed = ".bed"
-## rmask Paths 
+## rmask Paths
 L1HS = "/home/ubuntu/efs/SLAV_Data/rmask_L1HS_Final.bed"
 L1PA2345 = "/home/ubuntu/efs/SLAV_Data/rmask_L1PA2345_Final.bed"
 L1_Other = "/home/ubuntu/efs/SLAV_Data/rmask_L1_Other_Final.bed"
@@ -96,8 +96,8 @@ for dset in Data_Sets:
         print tissue
         name = os.path.join(basepath, tissue, tissue)
         bamfile = os.path.join(basepath, tissue, tissue+bam)
-        #p1 = Popen(['/home/preed/homer/bin/makeTagDirectory', '.', bamfile, '-format', 'sam', '-keepAll', '-single'])
-        #p1.wait()
+        p1 = Popen(['/home/preed/homer/bin/makeTagDirectory', '.', bamfile, '-format', 'sam', '-keepAll', '-single'])
+        p1.wait()
         p2a = Popen(['/home/preed/homer/bin/findPeaks', '.', '-o', 'peaks.txt', '-style', 'dnase', '-F', '0', '-L', '0', '-C', '0', '-tagThreshold', '5'])
         p2a.wait()
         p4 = Popen(['/home/preed/homer/bin/pos2bed.pl', '-bed', os.path.join(basepath, tissue, "peaks.txt")])
@@ -108,21 +108,21 @@ for dset in Data_Sets:
         print tissue
         name = os.path.join(basepath, tissue, tissue)
         bamfile = os.path.join(basepath, tissue, tissue+bam)
-        #p1 = Popen(['/home/preed/homer/bin/makeTagDirectory', '.', bamfile, '-format', 'sam', '-keepAll', '-single'])
-        #p1.wait()
+        p1 = Popen(['/home/preed/homer/bin/makeTagDirectory', '.', bamfile, '-format', 'sam', '-keepAll', '-single'])
+        p1.wait()
         p2a = Popen(['/home/preed/homer/bin/findPeaks', '.', '-o', 'peaks.txt', '-style', 'dnase', '-F', '0', '-L', '0', '-C', '0', '-tagThreshold', '5'])
         p2a.wait()
         p4 = Popen(['/home/preed/homer/bin/pos2bed.pl', '-bed', os.path.join(basepath, tissue, "peaks.txt")])
         p4.wait()
-        
-for dset in Data_Sets:    
+
+for dset in Data_Sets:
     for cell in dset[0]:
         print cell
         os.chdir(os.path.join(basepath, cell))
         name = os.path.join(basepath, cell, cell)
         bamfile = os.path.join(basepath, cell, cell+bam)
-        #p1 = Popen(['/home/preed/homer/bin/makeTagDirectory', '.', bamfile, '-format', 'sam', '-keepAll', '-single'])
-        #p1.wait()
+        p1 = Popen(['/home/preed/homer/bin/makeTagDirectory', '.', bamfile, '-format', 'sam', '-keepAll', '-single'])
+        p1.wait()
         p2a = Popen(['/home/preed/homer/bin/findPeaks', '.', '-o', 'peaks.txt', '-style', 'dnase', '-F', '0', '-L', '0', '-C', '0', '-tagThreshold', '5'])
         p2a.wait()
         p4 = Popen(['/home/preed/homer/bin/pos2bed.pl', '-bed', os.path.join(basepath, cell, "peaks.txt")])
@@ -136,5 +136,5 @@ for dset in Data_Sets:
         p6 = Popen(['/home/preed/homer/bin/mergePeaks', os.path.join(basepath,  cell, cell+"_100"),os.path.join(basepath,  cell, cell+"_110"),os.path.join(basepath,  cell, cell+"_111")], stdout=myoutput)
         p6.wait()
         p7 = Popen(['/home/preed/homer/bin/pos2bed.pl', os.path.join(basepath,  cell, cell + peaks_merged), '-o', os.path.join(basepath,  cell, cell+peaks_merged_bed)])
-        p7.wait()        
+        p7.wait()
 print "DONE!"

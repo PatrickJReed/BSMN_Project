@@ -18,25 +18,25 @@ import time
 
 
 ##Path to Data
-basepath = "/home/ubuntu/efs/SLAV_Data/" 
+basepath = "/home/ubuntu/efs/SLAV_Data/"
 narrowpeak = "-ready_peaks.narrowPeak"
 peaks_merged = "_peaksMerged.txt"
 peaks_merged_bed = "_peaksMerged.bed"
 peaks_correct_bed = "_peaksCorrect.bed"
 peakregions_sml = ".peakregions_sml"
-peakregions_lrg = ".peakregions_lrg"
+peakregions_sml = ".peakregions_sml"
 peaks_correct_data = "_peaksCorrect.data"
 peaks_L1HS_bedgraph = "_peaks_L1HS_mapped.bedgraph"
 loci_sml = ".loci_sml"
-loci_lrg = ".loci_lrg"
+loci_sml = ".loci_sml"
 overlap = "_overlap_"
 overlap_sml = "_overlap_sml_"
-overlap_lrg = "_overlap_lrg_"
+overlap_sml = "_overlap_sml_"
 L1HS_bam = "-L1HS_mapped.bam"
 bam = "-ready.bam"
 igv = "-igv.xml"
 bed = ".bed"
-## rmask Paths 
+## rmask Paths
 L1HS = "/home/ubuntu/efs/SLAV_Data/rmask_L1HS_Final.bed"
 L1PA2345 = "/home/ubuntu/efs/SLAV_Data/rmask_L1PA2345_Final.bed"
 L1_Other = "/home/ubuntu/efs/SLAV_Data/rmask_L1_Other_Final.bed"
@@ -78,7 +78,7 @@ for dset in Data_Sets_Train:
     cell = dset[0]
     print cell
     os.chdir(os.path.join(basepath, cell))
-    for file in glob.glob("*_lrg_s*__*.png"):
+    for file in glob.glob("*_sml_s*__*.png"):
         newfile = re.sub("_s\d+__", "-", file)
         shutil.move(file, newfile)
         img = Image.open(newfile)
@@ -95,19 +95,19 @@ for dset in Data_Sets_Train:
     print cell
     with open(os.path.join(basepath, cell, cell+"_Input_metadata.txt")) as f:
         for line in csv.reader(f, delimiter="\t"):
-            if os.path.isfile(os.path.join(basepath, cell,line[4])):
+            if os.path.isfile(os.path.join(basepath, cell,line[3])):
                 #print line[3]
-                filename = line[4]
+                filename = line[3]
                 readclass = line[5].split(":")[0]
                 peakclass_peak = line[5].split(":")[1]
                 L1_class_peak = line[5].split(":")[2]
-                peakclass_lrg = line[5].split(":")[5]
-                L1_class_lrg = line[5].split(":")[6]
-                class_lrg = [readclass,peakclass_peak,L1_class_peak,peakclass_lrg,L1_class_lrg]
-                dst = "".join(class_lrg)
-                if not os.path.exists(os.path.join(basepath, "Train_Large", dst)):
-                    os.makedirs(os.path.join(basepath, "Train_Large", dst))
-                if os.path.isfile(os.path.join(basepath, cell,filename)): 
-                    if not os.path.isfile(os.path.join(basepath, "Train_Large", dst,filename)):
-                        shutil.move(os.path.join(basepath, cell,filename), os.path.join(basepath, "Train_Large", dst))
-print "Done_B!" 
+                peakclass_sml = line[5].split(":")[3]
+                L1_class_sml = line[5].split(":")[4]
+                class_sml = [readclass,peakclass_peak,L1_class_peak,peakclass_sml,L1_class_sml]
+                dst = "".join(class_sml)
+                if not os.path.exists(os.path.join(basepath, "Train_Small", dst)):
+                    os.makedirs(os.path.join(basepath, "Train_Small", dst))
+                if os.path.isfile(os.path.join(basepath, cell,filename)):
+                    if not os.path.isfile(os.path.join(basepath, "Train_Small", dst,filename)):
+                        shutil.move(os.path.join(basepath, cell,filename), os.path.join(basepath, "Train_Small", dst))
+print "Done_B!"

@@ -56,7 +56,6 @@ for dset in Data_Sets:
     for cell in dset[0]:
         print cell
         os.chdir(os.path.join(basepath, cell))
-        locifile = os.path.join(basepath, cell, cell + loci_sml)
         worklist = glob.glob("*.split_loci_lrg_*")
         batchsize = 10
         print len(worklist)
